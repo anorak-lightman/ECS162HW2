@@ -71,13 +71,31 @@ hr{
     border-top: 1px solid #DFDFDF;
 }
 
+.thin-h2{
+    font-weight: 400;
+    font-size: xx-large;
+}
+
+.top-row{
+    margin-top: 0;
+}
+
+h2{
+    font-size: xx-large;
+}
+
+p{
+    color: #5A5A5A;
+}
+
 .center-col{
     display:block;
 }
 
 .row1col{
     border-right: 1px solid #DFDFDF;
-    padding: 0 0 70px 0;
+    padding: 0px 0 70px 0;
+    margin-top: 10px;
 }
 
 .row1col:first-child{
@@ -94,14 +112,14 @@ hr{
 }
 
 .hr-right{
-    margin: 29% 0px 0px 0px;
+    margin: 19% 0px 0px 0px;
     width: 99%;
     border: none;
     border-top: 1px solid #DFDFDF;
 }
 
 .hr-center{
-    margin: 40% 0px 0px 0px;
+    margin: 28.5% 0px 0px 0px;
     width: 99%;
     border: none;
     border-top: 1px solid #DFDFDF;
@@ -130,6 +148,7 @@ hr{
 
 .center-bottom{
     left: 10px;
+    margin-left: 20px;
 }
 
 .footer{

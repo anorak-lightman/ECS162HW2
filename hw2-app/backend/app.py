@@ -14,8 +14,8 @@ def get_key():
 
 @app.route('/')
 @app.route('/<path:path>')
-def serve_frontend(path=''):
-    if path != '' and os.path.exists(os.path.join(static_path,path)):
+def serve_frontend(path='hw2-app/frontend'):
+    if path != 'hw2-app/frontend' and os.path.exists(os.path.join(static_path,path)):
         return send_from_directory(static_path, path)
     return send_from_directory(template_path, 'index.html')
 

@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, send_from_directory
 import os
 from flask_cors import CORS
+from dotenv import load_dotenv
+load_dotenv()
 
 static_path = os.getenv('STATIC_PATH','static')
 template_path = os.getenv('TEMPLATE_PATH','templates')
@@ -10,12 +12,13 @@ CORS(app)
 
 @app.route('/api/key')
 def get_key():
+    print(os.getenv('NYT_API_KEY'))
     return jsonify({'apiKey': os.getenv('NYT_API_KEY')})
 
 @app.route('/')
 @app.route('/<path:path>')
-def serve_frontend(path='hw2-app/frontend'):
-    if path != 'hw2-app/frontend' and os.path.exists(os.path.join(static_path,path)):
+def serve_frontend(path=''):
+    if path != '' and os.path.exists(os.path.join(static_path,path)):
         return send_from_directory(static_path, path)
     return send_from_directory(template_path, 'index.html')
 

@@ -6,9 +6,10 @@ const formattedDate = todaysDate.toLocaleDateString('en-US', format);
 document.getElementById("formattedDate").innerText = formattedDate;
 console.log(formattedDate);
 let apiKey = '';
-let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=davis AND timesTag.location:Davis California&api-key=${apiKey}`;
+let SacUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento fq=timesTag.subject:"Sacramento" AND timesTag.location:"California"&api-key=${apiKey}`;
+let DavisUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=${apiKey}`;
 
-async function getAPIKey() {
+async function getAPIKey(url) {
     await fetch("http://127.0.0.1:8000/api/key")
         .then(response => response.json())
         .then(data => {
@@ -28,4 +29,5 @@ async function getAPIKey() {
         });
 }
 
-api = getAPIKey();
+getAPIKey(SacUrl);
+getAPIKey(DavisUrl);

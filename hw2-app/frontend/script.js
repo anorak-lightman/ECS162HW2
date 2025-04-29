@@ -6,17 +6,14 @@ const formattedDate = todaysDate.toLocaleDateString('en-US', format);
 document.getElementById("formattedDate").innerText = formattedDate;
 console.log(formattedDate);
 let apiKey = '';
-let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=${apiKey}`;
+let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=davis AND timesTag.location:Davis California&api-key=${apiKey}`;
 
 async function getAPIKey() {
     await fetch("http://127.0.0.1:8000/api/key")
         .then(response => response.json())
         .then(data => {
             apiKey = data.apiKey;
-            // console.log(apiKey);
             url = url.concat(String(apiKey));
-            console.log(url.concat(String(apiKey)));
-            // console.log(url);
             fetch(url)
                 .then(response => response.json())
                 .then(data => {

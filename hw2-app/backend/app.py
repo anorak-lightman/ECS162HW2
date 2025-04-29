@@ -12,7 +12,6 @@ CORS(app)
 
 @app.route('/api/key')
 def get_key():
-    print(os.getenv('NYT_API_KEY'))
     return jsonify({'apiKey': os.getenv('NYT_API_KEY')})
 
 @app.route('/')

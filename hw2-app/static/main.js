@@ -18,6 +18,7 @@
                 let sacStories = data.response.docs;
                 populateStories("center-col1-header", "center-col1", "center-col-image", ".center-col-link", sacStories[0]);
                 populateStories("center-bottom-header", "center-bottom", "center-bottom-image", ".center-bottom-link", sacStories[1]);
+                populateStories("right-top-header", "right-top", "right-top-image", ".right-top-link", sacStories[2]);
             })
             .catch(error => {
                 console.log('Error fetching data:', error);
@@ -33,6 +34,7 @@
                 console.log(davisStories)
                 populateStories("left-col1-header", "left-col1", "left-col-image", ".left-col-link", davisStories[0]);
                 populateStories("left-bottom-header", "left-bottom", "left-bottom-image", ".left-bottom-link", davisStories[1]);
+                populateStories("right-bottom-header", "right-bottom", "right-bottom-image", ".right-bottom-link", davisStories[2]);
             })
     }
 

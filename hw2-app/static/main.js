@@ -11,11 +11,12 @@
     let DavisUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=';
     let sacStories = [];
     let davisStories = [];
+    let curPage = 0;
 
-    async function createDom() {
+    async function createDom(pageNumber) {
         await fetch("http://127.0.0.1:8000/api/key")
             .then(response => response.json())
-            .then(api => fetch(SacUrl += api.apiKey))
+            .then(api => fetch(SacUrl + api.apiKey + "&page=" + pageNumber))
             .then(response => response.json())
             .then(data => sacStories = data.response.docs)
             .then(sacStories => {
@@ -53,7 +54,7 @@
             });
         await fetch("http://127.0.0.1:8000/api/key")
             .then(response => response.json())
-            .then(api => fetch(DavisUrl += api.apiKey))
+            .then(api => fetch(DavisUrl + api.apiKey + "&page=" + pageNumber))
             .then(response => response.json())
             .then(data => davisStories = data.response.docs)
             .then(davisStories => {
@@ -88,6 +89,28 @@
         link2.href = story.web_url;
     }
 
-    createDom();
+    createDom(curPage);
+
+    const loadMorePagesOnScroll = debounce(() => {
+        const endOfPage = window.innerHeight + window.pageYOffset + 1000 >= document.body.offsetHeight;
+        if (endOfPage) {
+            console.log("end of page");
+            curPage++;
+            createDom(curPage);
+        }
+    });
+
+    function debounce(func, timeout = 500) {
+        let timer;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timer);
+            timer = setTimeout(() => { func.apply(context, args); }, timeout);
+        };
+    }
+
+    window.addEventListener("scroll", loadMorePagesOnScroll);
+    
+
     
 })();

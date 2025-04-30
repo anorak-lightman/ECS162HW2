@@ -9,62 +9,85 @@
     console.log(formattedDate);
     let SacUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento fq=timesTag.subject:"Sacramento" AND timesTag.location:"California"&api-key=';
     let DavisUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=';
+    let sacStories = [];
+    let davisStories = [];
 
-    async function getSacStories(url) {
-        await fetch(url)
+    async function createDom() {
+        await fetch("http://127.0.0.1:8000/api/key")
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                let sacStories = data.response.docs;
-                populateStories("center-col1-header", "center-col1", "center-col-image", ".center-col-link", sacStories[0]);
-                populateStories("center-bottom-header", "center-bottom", "center-bottom-image", ".center-bottom-link", sacStories[1]);
-                populateStories("right-top-header", "right-top", "right-top-image", ".right-top-link", sacStories[2]);
+            .then(api => fetch(SacUrl += api.apiKey))
+            .then(response => response.json())
+            .then(data => sacStories = data.response.docs)
+            .then(sacStories => {
+                for (let i = 0; i < 5; i++) {
+                    let col = document.getElementsByClassName("row1col left-col")[0];
+                    let link1= col.appendChild(document.createElement("a"));
+                    let img = link1.appendChild(document.createElement("img"));
+                    let link2 = col.appendChild(document.createElement("a"));
+                    let header = link2.appendChild(document.createElement("h2"));
+                    header.className = "articleHeader";
+                    col.appendChild(document.createElement("br"));
+                    let snippet = col.appendChild(document.createElement("p"));
+                    snippet.className = "left-col1";
+                    let hr = col.appendChild(document.createElement("hr"));
+                    hr.className = "hr-center";
+                    populateStories(header, snippet, img, link1, link2, sacStories[i]);
+                }
+                for (let i = 5; i < 10; i++) {
+                    let col = document.getElementsByClassName("row1col center-col")[0];
+                    let link1= col.appendChild(document.createElement("a"));
+                    let img = link1.appendChild(document.createElement("img"));
+                    let link2 = col.appendChild(document.createElement("a"));
+                    let header = link2.appendChild(document.createElement("h2"));
+                    header.className = "articleHeader";
+                    col.appendChild(document.createElement("br"));
+                    let snippet = col.appendChild(document.createElement("p"));
+                    snippet.className = "center-col";
+                    let hr = col.appendChild(document.createElement("hr"));
+                    hr.className = "hr-center";
+                    populateStories(header, snippet, img, link1, link2, sacStories[i]);
+                }
             })
             .catch(error => {
-                console.log('Error fetching data:', error);
+                console.error('Error fetching key', error);
+            });
+        await fetch("http://127.0.0.1:8000/api/key")
+            .then(response => response.json())
+            .then(api => fetch(DavisUrl += api.apiKey))
+            .then(response => response.json())
+            .then(data => davisStories = data.response.docs)
+            .then(davisStories => {
+                for (let i = 0; i < 5; i++) {
+                    let col = document.getElementsByClassName("row1col right-col")[0];
+                    let link1= col.appendChild(document.createElement("a"));
+                    let img = link1.appendChild(document.createElement("img"));
+                    let link2 = col.appendChild(document.createElement("a"));
+                    let header = link2.appendChild(document.createElement("h2"));
+                    header.className = "articleHeader";
+                    col.appendChild(document.createElement("br"));
+                    let snippet = col.appendChild(document.createElement("p"));
+                    snippet.className = "right-top";
+                    let hr = col.appendChild(document.createElement("hr"));
+                    hr.className = "hr-center";
+                    populateStories(header, snippet, img, link1, link2, davisStories[i]);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching key', error);
             });
     }
 
-    async function getDavisStories(url) {
-        await fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                let davisStories = data.response.docs;
-                console.log(davisStories)
-                populateStories("left-col1-header", "left-col1", "left-col-image", ".left-col-link", davisStories[0]);
-                populateStories("left-bottom-header", "left-bottom", "left-bottom-image", ".left-bottom-link", davisStories[1]);
-                populateStories("right-bottom-header", "right-bottom", "right-bottom-image", ".right-bottom-link", davisStories[2]);
-            })
+    function populateStories(header, snippet, image, link1, link2, story) {
+        console.log(story);
+        header.innerText = story.headline.main;
+        snippet.innerText = story.snippet;
+        image.src = story.multimedia.default.url;
+        image.width = story.multimedia.default.width;
+        image.height = story.multimedia.default.height;
+        link1.href = story.web_url;
+        link2.href = story.web_url;
     }
 
-    fetch("http://127.0.0.1:8000/api/key")
-        .then(response => response.json())
-        .then(data => {
-            getSacStories(SacUrl += data.apiKey);
-        })
-        .catch(error => {
-            console.error('Error fetching key', error);
-        });
-
-    fetch("http://127.0.0.1:8000/api/key")
-        .then(response => response.json())
-        .then(data => {
-            getDavisStories(DavisUrl += data.apiKey);
-        })
-        .catch(error => {
-            console.error('Error fetching key', error);
-        });
-
-    function populateStories(header, snippet, image, link, story) {
-        document.getElementById(header).innerText = story.headline.main;
-        document.getElementById(snippet).innerText = story.snippet;
-        document.getElementById(image).src = story.multimedia.default.url;
-        document.getElementById(image).width = story.multimedia.default.width;
-        document.getElementById(image).height = story.multimedia.default.height;
-        const nodeList = document.querySelectorAll(link);
-        for (let i = 0; i < nodeList.length; i++) {
-            nodeList[i].href = story.web_url;
-        }
-    }
+    createDom();
+    
 })();

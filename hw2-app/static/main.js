@@ -15,19 +15,40 @@
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                let stories = data.response.docs;
-                populateStories("center-col1-header", "center-col1", "center-col-image", ".center-col-link", stories[0]);
-                populateStories("center-bottom-header", "center-bottom", "center-bottom-image", ".center-bottom-link", stories[1]);
+                let sacStories = data.response.docs;
+                populateStories("center-col1-header", "center-col1", "center-col-image", ".center-col-link", sacStories[0]);
+                populateStories("center-bottom-header", "center-bottom", "center-bottom-image", ".center-bottom-link", sacStories[1]);
             })
             .catch(error => {
                 console.log('Error fetching data:', error);
             });
     }
 
+    async function getDavisStories(url) {
+        await fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let davisStories = data.response.docs;
+                console.log(davisStories)
+                populateStories("left-col1-header", "left-col1", "left-col-image", ".left-col-link", davisStories[0]);
+                populateStories("left-bottom-header", "left-bottom", "left-bottom-image", ".left-bottom-link", davisStories[1]);
+            })
+    }
+
     fetch("http://127.0.0.1:8000/api/key")
         .then(response => response.json())
         .then(data => {
             getSacStories(SacUrl += data.apiKey);
+        })
+        .catch(error => {
+            console.error('Error fetching key', error);
+        });
+
+    fetch("http://127.0.0.1:8000/api/key")
+        .then(response => response.json())
+        .then(data => {
+            getDavisStories(DavisUrl += data.apiKey);
         })
         .catch(error => {
             console.error('Error fetching key', error);

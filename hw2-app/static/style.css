@@ -59,7 +59,7 @@ li{
 
 .row-element-1{
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-evenly; */
 }
 
 .articleHeader{
@@ -94,8 +94,7 @@ p{
 
 .row1col{
     border-right: 1px solid #DFDFDF;
-    padding: 0px 0 70px 0;
-    margin-top: 10px;
+    min-width: 0;
 }
 
 .row1col:first-child{
@@ -109,6 +108,11 @@ p{
 .row1col:last-child{
     border-right: none;
     padding: 20px 0px 0px 20px;
+}
+
+.row1col img{
+    max-width: 100%;
+    height: auto;
 }
 
 .hr-right{

@@ -79,7 +79,6 @@
     }
 
     function populateStories(header, snippet, image, link1, link2, story) {
-        console.log(story);
         header.innerText = story.headline.main;
         snippet.innerText = story.snippet;
         image.src = story.multimedia.default.url;
@@ -93,14 +92,14 @@
 
     const loadMorePagesOnScroll = debounce(() => {
         const endOfPage = window.innerHeight + window.pageYOffset + 1000 >= document.body.offsetHeight;
-        if (endOfPage) {
-            console.log("end of page");
+        if (endOfPage && curPage <= 3) {
+            // console.log("end of page");
             curPage++;
             createDom(curPage);
         }
     });
 
-    function debounce(func, timeout = 500) {
+    function debounce(func, timeout = 100) {
         let timer;
         return function(...args) {
             const context = this;
@@ -108,9 +107,5 @@
             timer = setTimeout(() => { func.apply(context, args); }, timeout);
         };
     }
-
     window.addEventListener("scroll", loadMorePagesOnScroll);
-    
-
-    
 })();

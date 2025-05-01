@@ -290,6 +290,11 @@ li{
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-top: 1px solid #DFDFDF;
+}
+
+.grid-element:not(:first-child){
+    padding-top: 20px;
 }
 
 .grid{
@@ -371,21 +376,21 @@ p{
     margin: 19% 0px 0px 0px;
     width: 99%;
     border: none;
-    border-top: 1px solid #DFDFDF;
+    /* border-top: 1px solid #DFDFDF; */
 }
 
 .hr-center{
     margin: 28.5% 0px 0px 0px;
     width: 99%;
     border: none;
-    border-top: 1px solid #DFDFDF;
+    /* border-top: 1px solid #DFDFDF; */
 }
 
 .hr-left{
     margin: 30% 0px 0px 0px;
     width: 99%;
     border: none;
-    border-top: 1px solid #DFDFDF;
+    /* border-top: 1px solid #DFDFDF; */
 }
 
 .basketball-img{

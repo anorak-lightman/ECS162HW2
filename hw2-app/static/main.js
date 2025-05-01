@@ -9,16 +9,52 @@
     console.log(formattedDate);
     let SacUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento fq=timesTag.subject:"Sacramento" AND timesTag.location:"California"&api-key=';
     let DavisUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=';
-    let sacStories = [];
-    let davisStories = [];
     let curPage = 0;
 
+    function fetchKey() {
+        return new Promise((resolve) => {
+            fetch("http://127.0.0.1:8000/api/key")
+                .then(response => response.json())
+                .then(data => {
+                    resolve(data.apiKey);
+                })
+                .catch(error => {
+                    console.error("error fetching key", error);
+                });
+        });
+    }
+
+    async function getSacStories(pageNumber) {
+        const key = await fetchKey();
+        return new Promise((resolve) => {
+            fetch(SacUrl + key + "&page=" + pageNumber)
+                .then(response => response.json())
+                .then(data => {
+                    resolve(data.response.docs);
+                })
+                .catch(error => {
+                    console.error("error getting sacramento stories", error);
+                });
+        });
+    }
+
+    async function getDavisStories(pageNumber) {
+        const key = await fetchKey();
+        return new Promise((resolve) => {
+            fetch(DavisUrl + key + "&page=" + pageNumber)
+                .then(response => response.json())
+                .then(data => {
+                    resolve(data.response.docs);
+                })
+                .catch(error => {
+                    console.error("error getting davis stories", error);
+                });
+        });
+    }
+
+
     async function createDom(pageNumber) {
-        await fetch("http://127.0.0.1:8000/api/key")
-            .then(response => response.json())
-            .then(api => fetch(SacUrl + api.apiKey + "&page=" + pageNumber))
-            .then(response => response.json())
-            .then(data => sacStories = data.response.docs)
+        await getSacStories(pageNumber)
             .then(sacStories => {
                 for (let i = 0; i < 5; i++) {
                     let col = document.getElementsByClassName("row1col left-col")[0];
@@ -60,13 +96,10 @@
                 }
             })
             .catch(error => {
-                console.error('Error fetching key', error);
+                console.error("error populating dom with sacramento stories", error);
             });
-        await fetch("http://127.0.0.1:8000/api/key")
-            .then(response => response.json())
-            .then(api => fetch(DavisUrl + api.apiKey + "&page=" + pageNumber))
-            .then(response => response.json())
-            .then(data => davisStories = data.response.docs)
+
+        await getDavisStories(pageNumber)
             .then(davisStories => {
                 for (let i = 0; i < 5; i++) {
                     let col = document.getElementsByClassName("row1col right-col")[0];
@@ -89,7 +122,7 @@
                 }
             })
             .catch(error => {
-                console.error('Error fetching key', error);
+                console.error("error populating dom with davis stories", error);
             });
     }
 
@@ -103,12 +136,9 @@
         link2.href = story.web_url;
     }
 
-    createDom(curPage);
-
     const loadMorePagesOnScroll = debounce(() => {
         const endOfPage = window.innerHeight + window.pageYOffset + 2000 >= document.body.offsetHeight;
         if (endOfPage && curPage <= 3) {
-            // console.log("end of page");
             curPage++;
             createDom(curPage);
         }
@@ -122,5 +152,7 @@
             timer = setTimeout(() => { func.apply(context, args); }, timeout);
         };
     }
+
+    createDom(curPage);
     window.addEventListener("scroll", loadMorePagesOnScroll);
 })();

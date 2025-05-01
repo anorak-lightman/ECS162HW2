@@ -22,29 +22,39 @@
             .then(sacStories => {
                 for (let i = 0; i < 5; i++) {
                     let col = document.getElementsByClassName("row1col left-col")[0];
-                    let link1= col.appendChild(document.createElement("a"));
+
+                    let gridElement = document.createElement("div");
+                    gridElement.className = "grid-element";
+                    col.appendChild(gridElement)
+
+                    let link1= gridElement.appendChild(document.createElement("a"));
                     let img = link1.appendChild(document.createElement("img"));
-                    let link2 = col.appendChild(document.createElement("a"));
+                    let link2 = gridElement.appendChild(document.createElement("a"));
                     let header = link2.appendChild(document.createElement("h2"));
                     header.className = "articleHeader";
-                    col.appendChild(document.createElement("br"));
-                    let snippet = col.appendChild(document.createElement("p"));
+                    gridElement.appendChild(document.createElement("br"));
+                    let snippet = gridElement.appendChild(document.createElement("p"));
                     snippet.className = "left-col1";
-                    let hr = col.appendChild(document.createElement("hr"));
+                    let hr = gridElement.appendChild(document.createElement("hr"));
                     hr.className = "hr-center";
                     populateStories(header, snippet, img, link1, link2, sacStories[i]);
                 }
                 for (let i = 5; i < 10; i++) {
                     let col = document.getElementsByClassName("row1col center-col")[0];
-                    let link1= col.appendChild(document.createElement("a"));
+
+                    let gridElement = document.createElement("div");
+                    gridElement.className = "grid-element";
+                    col.appendChild(gridElement)
+
+                    let link1= gridElement.appendChild(document.createElement("a"));
                     let img = link1.appendChild(document.createElement("img"));
-                    let link2 = col.appendChild(document.createElement("a"));
+                    let link2 = gridElement.appendChild(document.createElement("a"));
                     let header = link2.appendChild(document.createElement("h2"));
                     header.className = "articleHeader";
-                    col.appendChild(document.createElement("br"));
-                    let snippet = col.appendChild(document.createElement("p"));
+                    gridElement.appendChild(document.createElement("br"));
+                    let snippet = gridElement.appendChild(document.createElement("p"));
                     snippet.className = "center-col";
-                    let hr = col.appendChild(document.createElement("hr"));
+                    let hr = gridElement.appendChild(document.createElement("hr"));
                     hr.className = "hr-center";
                     populateStories(header, snippet, img, link1, link2, sacStories[i]);
                 }
@@ -60,15 +70,20 @@
             .then(davisStories => {
                 for (let i = 0; i < 5; i++) {
                     let col = document.getElementsByClassName("row1col right-col")[0];
-                    let link1= col.appendChild(document.createElement("a"));
+
+                    let gridElement = document.createElement("div");
+                    gridElement.className = "grid-element";
+                    col.appendChild(gridElement)
+
+                    let link1= gridElement.appendChild(document.createElement("a"));
                     let img = link1.appendChild(document.createElement("img"));
-                    let link2 = col.appendChild(document.createElement("a"));
+                    let link2 = gridElement.appendChild(document.createElement("a"));
                     let header = link2.appendChild(document.createElement("h2"));
                     header.className = "articleHeader";
-                    col.appendChild(document.createElement("br"));
-                    let snippet = col.appendChild(document.createElement("p"));
+                    gridElement.appendChild(document.createElement("br"));
+                    let snippet = gridElement.appendChild(document.createElement("p"));
                     snippet.className = "right-top";
-                    let hr = col.appendChild(document.createElement("hr"));
+                    let hr = gridElement.appendChild(document.createElement("hr"));
                     hr.className = "hr-center";
                     populateStories(header, snippet, img, link1, link2, davisStories[i]);
                 }

@@ -106,7 +106,7 @@
     createDom(curPage);
 
     const loadMorePagesOnScroll = debounce(() => {
-        const endOfPage = window.innerHeight + window.pageYOffset + 1000 >= document.body.offsetHeight;
+        const endOfPage = window.innerHeight + window.pageYOffset + 2000 >= document.body.offsetHeight;
         if (endOfPage && curPage <= 3) {
             // console.log("end of page");
             curPage++;

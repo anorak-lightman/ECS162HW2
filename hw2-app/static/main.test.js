@@ -1,5 +1,6 @@
-const fetchKey = require('./testFunctions/fetchKey');
-
+const fetchKey = require('./testFunctions/fetchKey.js');
+const fetch = require('node-fetch');    
+global.fetch = fetch;
 test('basic sanity check', () => {
     expect(1 + 1).toBe(2);
 });
@@ -8,3 +9,4 @@ test('fetch api key', async () => {
     const apiKey = await fetchKey();
     expect(apiKey).toBe('rFSzaY1UbSRUSoBOt6lsYpXubk49bygA');
 });
+

@@ -1,4 +1,3 @@
-"use strict";
 
 function fetchKey() {
     return new Promise((resolve) => {
@@ -13,5 +12,4 @@ function fetchKey() {
     });
 }
 module.exports = fetchKey;
-
 

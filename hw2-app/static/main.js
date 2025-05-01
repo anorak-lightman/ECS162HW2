@@ -1,12 +1,15 @@
 "use strict";
 (function() {
     // Date: Display current date
-    let todaysDate = new Date();
-    const format = {weekday : "long", month: "long", day: "numeric", year: "numeric"};
-    const formattedDate = todaysDate.toLocaleDateString('en-US', format);
+    function displayDate() {
+        let todaysDate = new Date();
+        const format = {weekday : "long", month: "long", day: "numeric", year: "numeric"};
+        const formattedDate = todaysDate.toLocaleDateString('en-US', format);
 
-    document.getElementById("formattedDate").innerText = formattedDate;
-    console.log(formattedDate);
+        document.getElementById("formattedDate").innerText = formattedDate;
+        console.log(formattedDate);
+    }
+
     let SacUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento fq=timesTag.subject:"Sacramento" AND timesTag.location:"California"&api-key=';
     let DavisUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=';
     let curPage = 0;
@@ -143,6 +146,7 @@
         };
     }
 
+    displayDate();
     createDom(curPage);
     window.addEventListener("scroll", loadMorePagesOnScroll);
 })();

@@ -114,7 +114,7 @@
         }
     });
 
-    function debounce(func, timeout = 100) {
+    function debounce(func, timeout = 200) {
         let timer;
         return function(...args) {
             const context = this;

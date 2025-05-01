@@ -2,7 +2,7 @@
     Chomsky import: https://www.onlinewebfonts.com/download/00048069ded7ec58aa6b96ccaff5f759
 */
 @import url("https://db.onlinewebfonts.com/c/00048069ded7ec58aa6b96ccaff5f759?family=Chomsky");
-
+/* 
 body{
     padding: 20px;
 }
@@ -59,7 +59,6 @@ li{
 
 .row-element-1{
     display: flex;
-    /* justify-content: space-evenly; */
 }
 
 .articleHeader{
@@ -228,4 +227,85 @@ p{
         height: 200px;
         width: auto;
     }
+} */
+
+/* Refactoring code becuase it kinda sucks?! */
+
+body{
+    padding: 20px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left, .header-right{
+    flex: 1;
+    min-width: 0;
+}
+
+.header, p{
+    margin: 0;
+}
+
+h2, p{
+    font-family: Georgia;
+}
+
+#formattedDate{
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.title{
+    font-family: 'Chomsky';
+    text-align: center;
+    margin: 0;
+    font-size: 65px;
+}
+
+a, .locations{
+    color: black;
+    font-size: 11px;
+    text-decoration: none;
+    display: flex;
+    gap: 20px;
+    padding: 0px;
+    justify-content: center;
+}
+
+li{
+    list-style-type: none;
+    display: inline;
+}
+
+.header-border{
+    margin: 0;
+}
+
+.grid-container{
+    display: inline-block; 
+    grid-auto-rows: 1fr;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; 
+    /* grid-auto-rows: auto; */
+    /* width: max-content;*/
+}
+
+.row1col{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: white; */
+}
+
+.row1col img{
+    width: 100%;
+    height: auto;
 }

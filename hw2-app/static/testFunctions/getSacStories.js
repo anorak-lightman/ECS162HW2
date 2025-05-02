@@ -1,3 +1,5 @@
+// Retreive Sacramento Stories from NYT Search API
+
 let SacUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento fq=timesTag.subject:"Sacramento" AND timesTag.location:"California"&api-key=';
 
 async function getSacStories(pageNumber) {

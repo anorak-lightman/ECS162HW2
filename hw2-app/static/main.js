@@ -10,6 +10,7 @@
         console.log(formattedDate);
     }
 
+    // Grab location specific articles
     let SacUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=Sacramento fq=timesTag.subject:"Sacramento" AND timesTag.location:"California"&api-key=';
     let DavisUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=';
     let curPage = 0;
@@ -29,6 +30,7 @@
         });
     }
 
+    // Retreive location specific stories given a "page number" -> 10 stories per page
     async function getSacStories(pageNumber) {
         const key = await fetchKey();
         return new Promise((resolve) => {
@@ -57,6 +59,7 @@
         });
     }
 
+    // Gets information from API and displays in a grid-like format 
     async function createDom(pageNumber) {
         sacStories = await getSacStories(pageNumber);
         davisStories = await getDavisStories(pageNumber);
@@ -119,6 +122,7 @@
         }
     }
 
+    //Gets data for stories
     function populateStories(header, snippet, image, link1, link2, story) {
         header.innerText = story.headline.main;
         snippet.innerText = story.snippet;
@@ -129,6 +133,7 @@
         link2.href = story.web_url;
     }
 
+    //Infinate Scroll
     const loadMorePagesOnScroll = debounce(() => {
         const endOfPage = window.innerHeight + window.pageYOffset + 2000 >= document.body.offsetHeight;
         if (endOfPage && curPage <= 3) {
@@ -137,6 +142,7 @@
         }
     });
 
+    //Prevent API from timing out
     function debounce(func, timeout = 200) {
         let timer;
         return function(...args) {

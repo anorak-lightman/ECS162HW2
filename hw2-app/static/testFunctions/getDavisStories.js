@@ -1,3 +1,5 @@
+// Retreive Davis stories from NYT Search API
+
 let DavisUrl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q="UC Davis"&api-key=';
 async function getDavisStories(pageNumber) {
     const key = 'rFSzaY1UbSRUSoBOt6lsYpXubk49bygA';

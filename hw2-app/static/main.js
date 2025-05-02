@@ -137,7 +137,7 @@
         }
     });
 
-    function debounce(func, timeout = 300) {
+    function debounce(func, timeout = 200) {
         let timer;
         return function(...args) {
             const context = this;
@@ -146,7 +146,10 @@
         };
     }
 
+    window.addEventListener("load", init);
     displayDate();
     createDom(curPage);
-    window.addEventListener("scroll", loadMorePagesOnScroll);
+    function init() {
+        window.addEventListener("scroll", loadMorePagesOnScroll);
+    }
 })();

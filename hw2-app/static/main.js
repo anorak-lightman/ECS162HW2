@@ -120,6 +120,7 @@
     }
 
     function populateStories(header, snippet, image, link1, link2, story) {
+        console.log(story);
         header.innerText = story.headline.main;
         snippet.innerText = story.snippet;
         image.src = story.multimedia.default.url;

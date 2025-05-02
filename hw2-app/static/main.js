@@ -59,7 +59,7 @@
         });
     }
 
-    // Gets information from API and displays in a grid-like format 
+    // Gets stories from the two above functions and displays in a grid-like format 
     async function createDom(pageNumber) {
         sacStories = await getSacStories(pageNumber);
         davisStories = await getDavisStories(pageNumber);
@@ -122,7 +122,7 @@
         }
     }
 
-    //Gets data for stories
+    //Populates html elements with information from story
     function populateStories(header, snippet, image, link1, link2, story) {
         header.innerText = story.headline.main;
         snippet.innerText = story.snippet;
@@ -133,7 +133,7 @@
         link2.href = story.web_url;
     }
 
-    //Infinate Scroll
+    //Infinate Scroll (not that infinite due to api calling time limits and restrictions)
     const loadMorePagesOnScroll = debounce(() => {
         const endOfPage = window.innerHeight + window.pageYOffset + 2500 >= document.body.offsetHeight;
         if (endOfPage && curPage <= 3) {
@@ -142,7 +142,7 @@
         }
     });
 
-    //Prevent API from timing out
+    //Prevent scroll from getting called multiple times within 200 milliseconds of each other
     function debounce(func, timeout = 200) {
         let timer;
         return function(...args) {

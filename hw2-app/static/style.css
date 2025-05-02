@@ -228,6 +228,18 @@ p{
     .title{
         font-size: 30px;
     }
+
+    .left-col{
+        order: 1;
+    }
+
+    .center-col{
+        order: 2;
+    }
+
+    .right-col{
+        order: 3;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 768px){

@@ -135,7 +135,7 @@
 
     //Infinate Scroll
     const loadMorePagesOnScroll = debounce(() => {
-        const endOfPage = window.innerHeight + window.pageYOffset + 2000 >= document.body.offsetHeight;
+        const endOfPage = window.innerHeight + window.pageYOffset + 2500 >= document.body.offsetHeight;
         if (endOfPage && curPage <= 3) {
             curPage++;
             createDom(curPage);

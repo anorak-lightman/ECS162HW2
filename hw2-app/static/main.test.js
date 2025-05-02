@@ -3,6 +3,7 @@ const getSacStories = require('./testFunctions/getSacStories.js');
 const getDavisStories = require('./testFunctions/getDavisStories.js');
 const createDom = require('./testFunctions/createDom.js');
 const populateStories = require("./testFunctions/populateStories.js");
+const displayDate = require("./testFunctions/displayDate.js");
 const fetch = require('node-fetch');   
 global.fetch = fetch;
 test('basic sanity check', () => {
@@ -103,6 +104,21 @@ test('populate stories', () => {
     expect(document.getElementById("image").height).toBe(11);
     expect(document.getElementsByClassName("articleHeader")[0].innerText).toBe("main");
     expect(document.getElementsByClassName("center-col")[0].innerText).toBe("snippet");
+});
+
+test('display date', () => {
+    document.body.innerHTML = `
+        <html>
+            <body>
+                <p id="formattedDate"></p>
+            </body>
+        </html>
+    `;
+    displayDate();
+    let todaysDate = new Date();
+    const format = {weekday : "long", month: "long", day: "numeric", year: "numeric"};
+    const formattedDate = todaysDate.toLocaleDateString('en-US', format);
+    expect(document.getElementById("formattedDate").innerText).toBe(formattedDate);
 });
 
 

@@ -90,11 +90,19 @@ test('populate stories', () => {
             default: {
                 url: "url",
                 width: 10,
-                height: 10
+                height: 11
             }
         },
         web_url: "https://example.com"
     }
     populateStories(document.getElementsByClassName("articleHeader")[0], document.getElementsByClassName("center-col")[0], document.getElementById("image"), document.getElementById("link1"), document.getElementById("link2"), story);
-    console.log(document.body.innerHTML);
+    expect(document.getElementById("link1").href).toBe("https://example.com/");
+    expect(document.getElementById("link2").href).toBe("https://example.com/");
+    expect(document.getElementById("image").src).toBe("http://localhost/url");
+    expect(document.getElementById("image").width).toBe(10);
+    expect(document.getElementById("image").height).toBe(11);
+    expect(document.getElementsByClassName("articleHeader")[0].innerText).toBe("main");
+    expect(document.getElementsByClassName("center-col")[0].innerText).toBe("snippet");
 });
+
+

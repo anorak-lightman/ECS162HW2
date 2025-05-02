@@ -192,14 +192,7 @@ p{
     border-color: black;
 }
 
-/* @media only screen and (max-width: 1024px){
-    #formattedDate, .today{
-        font-size: 10px;
-    }
-    .title{
-        font-size: 50px;
-    }
-} */
+
 
 @media only screen and (max-width: 767px){
     .grid{

@@ -64,7 +64,7 @@
             let col = document.getElementsByClassName("row1col left-col")[0];
 
             let gridElement = document.createElement("div");
-            gridElement.className = "grid-element";
+            gridElement.className = "grid-element left-grid";
             col.appendChild(gridElement)
 
             let link1= gridElement.appendChild(document.createElement("a"));
@@ -83,7 +83,7 @@
             let col = document.getElementsByClassName("row1col center-col")[0];
 
             let gridElement = document.createElement("div");
-            gridElement.className = "grid-element";
+            gridElement.className = "grid-element center-grid";
             col.appendChild(gridElement)
 
             let link1= gridElement.appendChild(document.createElement("a"));
@@ -102,7 +102,7 @@
             let col = document.getElementsByClassName("row1col right-col")[0];
 
             let gridElement = document.createElement("div");
-            gridElement.className = "grid-element";
+            gridElement.className = "grid-element right-grid";
             col.appendChild(gridElement)
 
             let link1= gridElement.appendChild(document.createElement("a"));
